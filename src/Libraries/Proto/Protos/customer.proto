@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+option csharp_namespace = "Proto";
+
+service RemoteCustomer {
+  rpc GetAll (CustomerEmptyRequest) returns (CustomersReply);
+  rpc GetCustomerById (CustomerSearchRequest) returns (CustomerReply);
+  rpc DeleteCustomerById (CustomerSearchRequest) returns (CustomerSuccess);
+  rpc AddItem (CustomerRequest) returns (CustomerSuccess);
+  rpc UpdateById (CustomerRequest) returns (CustomerSuccess);
+}
+
+message CustomerEmptyRequest {
+}
+
+message CustomerEmptyReply {
+}
+
+message CustomerSearchRequest {
+    int32 CustomerID = 1;
+}
+
+message CustomerRequest {
+    int32 CustomerID = 1;
+    string FirstName = 2;
+    string LastName = 3;
+}
+
+message CustomerSuccess {
+    bool success = 1;
+}
+
+message CustomerReply {
+    int32 CustomerID = 1;
+    string FirstName = 2;
+    string LastName = 3;
+}
+
+message CustomersReply {
+    repeated CustomerReply Customers = 1;
+}

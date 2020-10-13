@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+option csharp_namespace = "Proto";
+
+service RemoteProduct {
+  rpc GetAll (ProductEmptyRequest) returns (ProductsReply);
+  rpc GetProductById (ProductSearchRequest) returns (ProductReply);
+  rpc DeleteProductById (ProductSearchRequest) returns (ProductSuccess);
+  rpc AddItem (ProductRequest) returns (ProductSuccess);
+  rpc UpdateById (ProductRequest) returns (ProductSuccess);
+}
+
+message ProductEmptyRequest {
+}
+
+message ProductEmptyReply {
+}
+
+message ProductSearchRequest {
+    int32 ProductID = 1;
+}
+
+message ProductRequest {
+    int32 ProductID = 1;
+    string Name = 2;
+    string Cost = 3;
+    string Price = 4;
+}
+
+message ProductSuccess {
+    bool success = 1;
+}
+
+message ProductReply {
+    int32 ProductID = 1;
+    string Name = 2;
+    string Cost = 3;
+    string Price = 4;
+}
+
+message ProductsReply {
+    repeated ProductReply Products = 1;
+}

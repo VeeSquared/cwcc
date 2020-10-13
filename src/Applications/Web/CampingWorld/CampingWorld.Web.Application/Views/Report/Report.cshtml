@@ -1,0 +1,83 @@
+﻿@{
+    ViewData["Title"] = "End of Week Reports";
+}
+
+@using CampingWorld.Web.Application.Models
+@using CampingWorld.Web.Application.Helpers
+@using System.Linq
+
+@model IEnumerable<ProductModel>
+
+<h1 class="text-center">End of Week Reports</h1>
+<!--
+<h5 class="text-right">Sort By:</h5>
+
+Html.DropDownList("SortProductList",
+                    new SelectList(Enum.GetValues(typeof(ProductSortBy)).Cast<ProductSortBy>().Select(v => v.GetDescription()).ToList()),
+                    new { class = "form-control w-25 float-right", id = "SortProductList", name = "SortProductList" })-->
+
+
+
+@if (!Model.Any())
+{
+    <h3 class="d-inline-block w-100 text-center">There are no items this week.</h3>
+}
+else
+{
+<table class="table table mt-2 d-inline-block text-center">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductName)
+            </th>
+            <th>
+                @Html.ActionLink(@Html.DisplayNameFor(model => model.QuantitySold), "Report", new { sortOrder = ViewBag.QuantitySoldSortParm })
+
+            </th>
+            <th>
+                @Html.ActionLink(@Html.DisplayNameFor(model => model.Revenue), "Report", new { sortOrder = ViewBag.RevenueSortParm })
+            </th>
+            <th>
+                @Html.ActionLink(@Html.DisplayNameFor(model => model.Profit), "Report", new { sortOrder = ViewBag.ProfitSortParm })
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cost)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelProduct => product.ProductId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelProduct => product.ProductName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelProduct => product.QuantitySold)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelProduct => product.Revenue)
+                </td>
+                <th>
+                    @Html.DisplayFor(modelProduct => product.Profit)
+                </th>
+                <th>
+                    @Html.DisplayFor(modelProduct => product.Price)
+                </th>
+                <th>
+                    @Html.DisplayFor(modelProduct => product.Cost)
+                </th>
+            </tr>
+        }
+    </tbody>
+</table>
+}

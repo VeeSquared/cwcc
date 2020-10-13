@@ -1,0 +1,89 @@
+﻿@{
+    ViewData["Title"] = "Receipt";
+}
+
+@using CampingWorld.Web.Application.Models
+@using CampingWorld.Web.Application.Helpers
+@using System.Linq
+
+@model IEnumerable<ReceiptModel>
+
+<h1>Receipt</h1>
+
+@using (Html.BeginForm())
+{
+    <p>
+        Name  : @Html.TextBox("orderStr")<br />
+        <input type="submit" value="Search" />
+    </p>
+}
+
+
+@if (!Model.Any())
+{
+}
+else
+{
+    <h3><span>Customer:</span>@Model.First().CustomerName</h3>
+
+    <table class="table table mt-2 d-inline-block text-center">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.OrderID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.OrderDate)
+
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ProductName)
+
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ProductID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Price)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Quantity)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ExtendedPrice)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelProduct => product.OrderID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelProduct => product.OrderDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelProduct => product.ProductName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelProduct => product.ProductID)
+                    </td>
+                    <th>
+                        @Html.DisplayFor(modelProduct => product.Price)
+                    </th>
+                    <th>
+                        @Html.DisplayFor(modelProduct => product.Quantity)
+                    </th>
+                    <th>
+                        @Html.DisplayFor(modelProduct => product.ExtendedPrice)
+                    </th>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <h3><span>Total:$</span>@Model.First().Total</h3>
+
+}

@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+option csharp_namespace = "Proto";
+
+service RemoteOrder {
+  rpc GetAll (OrderEmptyRequest) returns (OrdersReply);
+  rpc GetOrderById (OrderSearchRequest) returns (OrderReply);
+  rpc DeleteOrderById (OrderSearchRequest) returns (OrderSuccess);
+  rpc AddItem (OrderRequest) returns (OrderSuccess);
+  rpc UpdateById (OrderRequest) returns (OrderSuccess);
+}
+
+message OrderEmptyRequest {
+}
+
+message OrderEmptyReply {
+}
+
+message OrderSearchRequest {
+    int32 OrderID = 1;
+}
+
+message OrderRequest {
+    int32 OrderID = 1;
+    string OrderDate = 2;
+    int32 CustomerID = 3;
+}
+
+message OrderSuccess {
+    bool success = 1;
+}
+
+message OrderReply {
+    int32 OrderID = 1;
+    string OrderDate = 2;
+    int32 CustomerID = 3;
+}
+
+message OrdersReply {
+    repeated OrderReply Orders = 1;
+}

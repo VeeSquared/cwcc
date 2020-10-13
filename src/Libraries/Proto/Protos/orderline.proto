@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+option csharp_namespace = "Proto";
+
+service RemoteOrderLine {
+  rpc GetAll (OrderLineEmptyRequest) returns (OrderLinesReply);
+  rpc GetOrderLineById (OrderLineSearchRequest) returns (OrderLineReply);
+  rpc GetOrderLinesByOrderId (OrderLineByOrderRequest) returns (OrderLinesReply);
+  rpc DeleteOrderLineById (OrderLineSearchRequest) returns (OrderLineSuccess);
+  rpc AddItem (OrderLineRequest) returns (OrderLineSuccess);
+  rpc UpdateById (OrderLineRequest) returns (OrderLineSuccess);
+}
+
+message OrderLineEmptyRequest {
+}
+
+message OrderLineEmptyReply {
+}
+
+message OrderLineByOrderRequest {
+    int32 OrderID = 1;
+}
+
+message OrderLineSearchRequest {
+    int32 OrderLineID = 1;
+}
+
+message OrderLineRequest {
+    int32 OrderLineID = 1;
+    int32 ProductID = 2;
+    int32 Quantity = 3;
+    int32 OrderID = 4;
+}
+
+message OrderLineSuccess {
+    bool success = 1;
+}
+
+message OrderLineReply {
+    int32 OrderLineID = 1;
+    int32 ProductID = 2;
+    int32 Quantity = 3;
+    int32 OrderID = 4;
+}
+
+message OrderLinesReply {
+    repeated OrderLineReply OrderLines = 1;
+}
