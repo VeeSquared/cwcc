@@ -1,0 +1,2 @@
+obj\Debug\netcoreapp3.1\.\Protos/Orderline.cs \
+obj\Debug\netcoreapp3.1\.\Protos/OrderlineGrpc.cs: Protos/orderline.proto
